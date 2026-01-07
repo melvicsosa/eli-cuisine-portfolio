@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: var(--font-playfair);
+  --font-sans: var(--font-lato);
+  --color-gold: var(--color-gold);
+  --color-primary: var(--color-primary);
+  --color-ivory: var(--color-ivory);
+  --color-surface: var(--color-surface);
+  --color-bronze: var(--color-bronze);
+}
+
+:root {
+  --background: #FAF9F6;
+  --foreground: #1a1a1a;
+  --color-gold: #c7b390;
+  --color-primary: #1a1a1a;
+  --color-ivory: #FAF9F6;
+  --color-surface: #EAE8E4;
+  --color-bronze: #B0A085;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-sans);
+}
+
+/* Custom Utilities mirroring the original */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+/* Animation Keyframes for Float */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
