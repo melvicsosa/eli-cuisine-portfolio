@@ -26,7 +26,7 @@ export const Services = () => {
   }, []);
 
   return (
-    <section ref={containerRef} id="services" className="py-32 px-6 md:px-12 bg-primary text-ivory relative overflow-hidden">
+    <section ref={containerRef} id="services" className="py-16 md:py-24 lg:py-32 px-6 md:px-12 bg-primary text-ivory relative overflow-hidden">
       {/* Decorative Circle */}
       <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full border border-ivory/5"></div>
 

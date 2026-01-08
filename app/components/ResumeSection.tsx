@@ -28,7 +28,7 @@ export const ResumeSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="resume" className="py-24 px-6 md:px-12 bg-surface">
+    <section ref={sectionRef} id="resume" className="py-16 lg:py-24 px-6 md:px-12 bg-surface">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <span className="text-primary uppercase tracking-[0.2em] text-sm font-bold opacity-60">

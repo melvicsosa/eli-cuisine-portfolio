@@ -22,6 +22,7 @@ export const PortfolioSection = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      // Entry Animation
       gsap.from(".portfolio-card", {
         y: 100,
         opacity: 0,
@@ -31,6 +32,18 @@ export const PortfolioSection = () => {
           trigger: sectionRef.current,
           start: "top 70%"
         }
+      });
+
+      // Scroll-based "Hover" Effect for Mobile
+      const images = gsap.utils.toArray<HTMLElement>(".portfolio-image");
+      images.forEach((img) => {
+        ScrollTrigger.create({
+          trigger: img,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleClass: "is-active",
+          // markers: true, // Debugging
+        });
       });
     }, sectionRef);
     return () => ctx.revert();
@@ -51,7 +64,7 @@ export const PortfolioSection = () => {
   };
 
   return (
-    <section ref={sectionRef} id="portfolio" className="py-32 px-6 md:px-12 bg-ivory">
+    <section ref={sectionRef} id="portfolio" className="py-16 md:py-24 lg:py-32 px-6 md:px-12 bg-ivory">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-20">
           <span className="text-gold uppercase tracking-[0.2em] text-sm font-bold">
@@ -67,13 +80,13 @@ export const PortfolioSection = () => {
               className="portfolio-card group cursor-pointer"
               onClick={() => setSelectedItemIndex(idx)}
             >
-              <div className="h-[400px] overflow-hidden relative mb-6 grayscale group-hover:grayscale-0 transition-all duration-700">
+              <div className="portfolio-image h-[300px] md:h-[400px] overflow-hidden relative mb-6 grayscale group-hover:grayscale-0 [&.is-active]:grayscale-0 transition-all duration-700">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-in-out"
+                  className="w-full h-full object-cover transform group-hover:scale-105 [&.is-active]:scale-105 transition-transform duration-1000 ease-in-out"
                 />
-                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors duration-500"></div>
+                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 [&.is-active]:bg-primary/10 transition-colors duration-500"></div>
               </div>
               <div className="flex justify-between items-baseline mb-2">
                 <h3 className="font-serif text-2xl text-primary group-hover:text-gold transition-colors">{item.title}</h3>

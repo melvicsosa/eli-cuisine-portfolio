@@ -47,7 +47,7 @@ export const Hero = ({ onOpenInquire }: { onOpenInquire: () => void }) => {
   }, []);
 
   return (
-    <section ref={containerRef} id="home" className="relative min-h-screen pt-32 pb-20 px-6 md:px-12 flex items-center bg-ivory overflow-hidden">
+    <section ref={containerRef} id="home" className="relative min-h-screen pt-24 md:pt-32 pb-12 md:pb-20 px-6 md:px-12 flex items-center bg-ivory overflow-hidden">
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 w-full items-center">
         {/* Left Content */}
@@ -82,12 +82,12 @@ export const Hero = ({ onOpenInquire }: { onOpenInquire: () => void }) => {
                 src={heroImgSrc}
                 onError={() => setHeroImgSrc(FALLBACK_HERO_IMAGE)}
                 alt="Chef Eli Cuisine Profile"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-[center_20%]"
               />
             </div>
 
             {/* Resume Badge */}
-            <div ref={badgeRef} className="absolute top-12 -left-4 md:-left-12 bg-white/90 backdrop-blur shadow-xl p-6 border-l-4 border-gold animate-float z-20">
+            <div ref={badgeRef} className="absolute bottom-8 lg:top-12 lg:bottom-auto -left-4 md:-left-12 bg-white/90 backdrop-blur shadow-xl p-4 md:p-6 border-l-4 border-gold animate-float z-20">
               <div className="flex items-center gap-2 mb-2">
                 <Award className="w-5 h-5 text-gold" />
                 <p className="font-serif text-xl italic text-primary">{HERO_CONTENT.badgeTitle}</p>

@@ -43,7 +43,7 @@ export const GallerySection = () => {
   };
 
   return (
-    <section ref={sectionRef} className="py-24 px-6 md:px-12 bg-ivory border-t border-primary/5">
+    <section ref={sectionRef} className="py-16 lg:py-24 px-6 md:px-12 bg-ivory border-t border-primary/5">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <span className="text-gold uppercase tracking-[0.2em] text-sm font-bold">
