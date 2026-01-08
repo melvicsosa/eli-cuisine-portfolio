@@ -33,7 +33,7 @@ export default function Home() {
       <GallerySection />
       <Services />
       <Footer />
-      <InquireModal isOpen={isInquireOpen} onClose={() => setIsInquireOpen(false)} />
+      {isInquireOpen && <InquireModal isOpen={isInquireOpen} onClose={() => setIsInquireOpen(false)} />}
     </main>
   );
 }

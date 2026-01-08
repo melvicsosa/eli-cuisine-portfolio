@@ -17,8 +17,10 @@ export const InquireModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: ()
 
   useEffect(() => {
     if (state.success) {
-      alert(state.message);
-      onClose();
+      const timer = setTimeout(() => {
+        onClose();
+      }, 5000);
+      return () => clearTimeout(timer);
     }
   }, [state, onClose]);
 
@@ -70,52 +72,76 @@ export const InquireModal = ({ isOpen, onClose }: { isOpen: boolean; onClose: ()
           <h3 className="font-serif text-3xl mt-2 text-primary">{INQUIRE_MODAL_CONTENT.title}</h3>
         </div>
 
-        <form action={formAction} className="space-y-6">
-          <div className="space-y-1">
-            <label className="text-xs uppercase font-bold tracking-widest text-primary/60">{INQUIRE_MODAL_CONTENT.form.nameLabel}</label>
-            <input required name="name" type="text" className="w-full bg-transparent border-b border-primary/20 py-2 text-primary focus:border-gold focus:outline-none transition-colors font-serif" placeholder={INQUIRE_MODAL_CONTENT.form.namePlaceholder} />
+        {state.success ? (
+          <div className="text-center py-12 space-y-4 animate-in fade-in duration-500">
+            <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+              <span className="text-4xl text-gold">✓</span>
+            </div>
+            <h4 className="font-serif text-2xl text-primary">Message Sent!</h4>
+            <p className="text-primary/70 font-sans max-w-xs mx-auto">
+              Thank you for reaching out. We will get back to you shortly.
+            </p>
           </div>
+        ) : (
+          <form action={formAction} className="space-y-6">
+            <div className="space-y-1">
+              <label className="text-xs uppercase font-bold tracking-widest text-primary/60">
+                {INQUIRE_MODAL_CONTENT.form.nameLabel} <span className="text-red-500">*</span>
+              </label>
+              <input required maxLength={50} name="name" type="text" className="w-full bg-transparent border-b border-primary/20 py-2 text-primary focus:border-gold focus:outline-none transition-colors font-serif" placeholder={INQUIRE_MODAL_CONTENT.form.namePlaceholder} />
+            </div>
 
-          <div className="space-y-1">
-            <label className="text-xs uppercase font-bold tracking-widest text-primary/60">{INQUIRE_MODAL_CONTENT.form.emailLabel}</label>
-            <input required name="email" type="email" className="w-full bg-transparent border-b border-primary/20 py-2 text-primary focus:border-gold focus:outline-none transition-colors font-serif" placeholder={INQUIRE_MODAL_CONTENT.form.emailPlaceholder} />
-          </div>
+            <div className="space-y-1">
+              <label className="text-xs uppercase font-bold tracking-widest text-primary/60">
+                {INQUIRE_MODAL_CONTENT.form.emailLabel} <span className="text-red-500">*</span>
+              </label>
+              <input required maxLength={50} name="email" type="email" className="w-full bg-transparent border-b border-primary/20 py-2 text-primary focus:border-gold focus:outline-none transition-colors font-serif" placeholder={INQUIRE_MODAL_CONTENT.form.emailPlaceholder} />
+            </div>
 
-          <div className="space-y-1">
-            <label className="text-xs uppercase font-bold tracking-widest text-primary/60">{INQUIRE_MODAL_CONTENT.form.purposeLabel}</label>
-            <div className="relative">
-              <select required name="purpose" className="w-full bg-transparent border-b border-primary/20 py-2 text-primary focus:border-gold focus:outline-none transition-colors font-serif appearance-none cursor-pointer">
-                <option value="" disabled selected>{INQUIRE_MODAL_CONTENT.form.purposePlaceholder}</option>
-                {INQUIRE_MODAL_CONTENT.form.purposeOptions.map((opt) => (
-                  <option key={opt.value} value={opt.value}>{opt.label}</option>
-                ))}
-              </select>
-              <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-primary/40">
-                <ArrowRight className="w-4 h-4 rotate-90" />
+            <div className="space-y-1">
+              <label className="text-xs uppercase font-bold tracking-widest text-primary/60">
+                {INQUIRE_MODAL_CONTENT.form.purposeLabel} <span className="text-red-500">*</span>
+              </label>
+              <div className="relative">
+                <select required name="purpose" className="w-full bg-transparent border-b border-primary/20 py-2 text-primary focus:border-gold focus:outline-none transition-colors font-serif appearance-none cursor-pointer">
+                  <option value="" disabled selected>{INQUIRE_MODAL_CONTENT.form.purposePlaceholder}</option>
+                  {INQUIRE_MODAL_CONTENT.form.purposeOptions.map((opt) => (
+                    <option key={opt.value} value={opt.value}>{opt.label}</option>
+                  ))}
+                </select>
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-primary/40">
+                  <ArrowRight className="w-4 h-4 rotate-90" />
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="space-y-1">
-            <label className="text-xs uppercase font-bold tracking-widest text-primary/60">{INQUIRE_MODAL_CONTENT.form.messageLabel}</label>
-            <textarea required name="message" rows={3} className="w-full bg-transparent border-b border-primary/20 py-2 text-primary focus:border-gold focus:outline-none transition-colors font-serif resize-none" placeholder={INQUIRE_MODAL_CONTENT.form.messagePlaceholder}></textarea>
-          </div>
+            <div className="space-y-1">
+              <label className="text-xs uppercase font-bold tracking-widest text-primary/60">
+                {INQUIRE_MODAL_CONTENT.form.messageLabel} <span className="text-red-500">*</span>
+              </label>
+              <textarea required name="message" rows={3} className="w-full bg-transparent border-b border-primary/20 py-2 text-primary focus:border-gold focus:outline-none transition-colors font-serif resize-none" placeholder={INQUIRE_MODAL_CONTENT.form.messagePlaceholder}></textarea>
+            </div>
 
-          <button
-            type="submit"
-            disabled={isPending}
-            className="cursor-pointer w-full bg-primary text-ivory py-4 text-xs uppercase tracking-widest font-bold hover:bg-gold hover:text-primary transition-all duration-300 mt-4 disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2"
-          >
-            {isPending ? (
-              <>
-                <Loader2 className="w-4 h-4 animate-spin" />
-                SENDING...
-              </>
-            ) : (
-              INQUIRE_MODAL_CONTENT.form.submitButton
+            {state.message && !state.success && (
+              <p className="text-red-500 text-sm text-center font-bold">{state.message}</p>
             )}
-          </button>
-        </form>
+
+            <button
+              type="submit"
+              disabled={isPending}
+              className="cursor-pointer w-full bg-primary text-ivory py-4 text-xs uppercase tracking-widest font-bold hover:bg-gold hover:text-primary transition-all duration-300 mt-4 disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2"
+            >
+              {isPending ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  SENDING...
+                </>
+              ) : (
+                INQUIRE_MODAL_CONTENT.form.submitButton
+              )}
+            </button>
+          </form>
+        )}
       </div>
     </div>
   );
